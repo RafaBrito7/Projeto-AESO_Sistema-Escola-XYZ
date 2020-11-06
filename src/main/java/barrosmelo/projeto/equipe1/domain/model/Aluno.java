@@ -1,46 +1,31 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 public class Aluno extends Pessoa {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_aluno")
-	private Long id;
-
 	@Column(name = "numero_matricula")
 	private String numeroMatricula;
-
-	private BigDecimal nota;
+	private String turma; //Lembrar alterar tipo para Turma
+	private Double nota;
+	private String permissao; //Lembrar alterar tipo para EnumPermissao
 
 	public Aluno() {
 
 	}
 
-	public Aluno(String nome, String cpf, String dataNascimento) {
+	public Aluno(String nome, String cpf, Date dataNascimento) {
 		super(nome, cpf, dataNascimento);
 	}
 
-	public Aluno(String nome, String cpf, String dataNascimento, String numeroMatricula, BigDecimal nota) {
+	public Aluno(String nome, String cpf, Date dataNascimento, String numeroMatricula, Double nota) {
 		super(nome, cpf, dataNascimento);
 		this.numeroMatricula = numeroMatricula;
 		this.nota = nota;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNumeroMatricula() {
@@ -51,19 +36,35 @@ public class Aluno extends Pessoa {
 		this.numeroMatricula = numeroMatricula;
 	}
 
-	public BigDecimal getNota() {
+	public Double getNota() {
 		return nota;
 	}
 
-	public void setNota(BigDecimal nota) {
+	public void setNota(Double nota) {
 		this.nota = nota;
+	}
+
+	public String getTurma() {
+		return turma;
+	}
+
+	public void setTurma(String turma) {
+		this.turma = turma;
+	}
+
+	public String getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(String permissao) {
+		this.permissao = permissao;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((numeroMatricula == null) ? 0 : numeroMatricula.hashCode());
 		return result;
 	}
 
@@ -71,21 +72,17 @@ public class Aluno extends Pessoa {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Aluno other = (Aluno) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (numeroMatricula == null) {
+			if (other.numeroMatricula != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!numeroMatricula.equals(other.numeroMatricula))
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Aluno [id=" + id + ", numeroMatricula=" + numeroMatricula + ", nota=" + nota + "]";
-	}	
+	
 }
