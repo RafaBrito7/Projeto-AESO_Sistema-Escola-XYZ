@@ -1,21 +1,24 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-public class Professor {
+import java.util.List;
 
-	private Turma turma;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity
+public class Professor extends Pessoa{
 	
 	private String permissao;
 	
+	@ManyToMany
+	@JoinTable(name = "turma_professor", joinColumns = @JoinColumn(name = "professor_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "turma_id", nullable = false))
+	private List<Turma> turmas;
+
+	
 	public Professor() {
-		
-	}
 
-	public Turma getTurma() {
-		return turma;
-	}
-
-	public void setTurma(Turma turma) {
-		this.turma = turma;
 	}
 
 	public String getPermissao() {
@@ -25,5 +28,12 @@ public class Professor {
 	public void setPermissao(String permissao) {
 		this.permissao = permissao;
 	}
-	
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
 }

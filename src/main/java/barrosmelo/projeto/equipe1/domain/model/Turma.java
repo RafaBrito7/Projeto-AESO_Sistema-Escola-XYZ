@@ -1,17 +1,36 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Turma {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "turma_id")
 	private Long idTurma;
-	
+
 	private String anoAdmissao;
-	
+
 	private Integer vagas;
-	
+
 	private String ementa;
-	
+
+	@ManyToMany
+	@JoinTable(name = "turma_professor", joinColumns = @JoinColumn(name = "turma_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "professor_id", nullable = false))
+	private List<Professor> professores;
+
 	public Turma() {
-		
+
 	}
 
 	public Long getIdTurma() {
@@ -46,6 +65,14 @@ public class Turma {
 		this.ementa = ementa;
 	}
 
+	public List<Professor> getProfessores() {
+		return professores;
+	}
+
+	public void setProfessores(List<Professor> professores) {
+		this.professores = professores;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +97,5 @@ public class Turma {
 			return false;
 		return true;
 	}
-	
-	
+
 }

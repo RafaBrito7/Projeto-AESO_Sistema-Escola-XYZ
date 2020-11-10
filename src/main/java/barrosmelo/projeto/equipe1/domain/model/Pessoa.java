@@ -2,15 +2,40 @@ package barrosmelo.projeto.equipe1.domain.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pessoa")
 	private Long id;
+	
 	private String nome;
+	
+	@Column(name = "data_nascimento")
 	private Date dataNascimento;
+	
 	private String cpf;
+	
 	private Boolean vinculo;
+	
+	@Column(name = "data_vinculo")
+	@CreationTimestamp
 	private Date dataVinculo;
+	
 	private String usuario;
+	
 	private String senha;
 	
 	

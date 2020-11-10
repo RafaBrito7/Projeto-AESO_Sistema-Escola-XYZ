@@ -1,6 +1,9 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-public class Adm {
+import javax.persistence.Entity;
+
+@Entity
+public class Adm extends Pessoa{
 
 	private String permissao;
 	
