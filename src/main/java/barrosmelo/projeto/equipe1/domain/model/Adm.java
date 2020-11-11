@@ -1,6 +1,6 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-public class Adm {
+public class Adm extends Pessoa{
 
 	private String permissao;
 	

@@ -1,6 +1,6 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-public class Professor {
+public class Professor extends Pessoa{
 
 	private Turma turma;
 	
