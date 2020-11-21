@@ -5,30 +5,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Disciplina {
+@Entity
+public class Credencial {
 
 	@Id
+	@Column(name = "id_credendial")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_disciplina")
 	@EqualsAndHashCode.Include
-	private Long id;
+	private Long idCredencial;
 
-	@Column(name = "nome_disciplina")
-	private String nomeDisciplina;
+	private String usuario;
 
-	@Column(name = "carga_horaria")
-	private Double cargaHoraria;
-
-	@ManyToOne
-	@JoinColumn(name = "id_turma")
-	private Turma turma;
+	private String senha;
+	
+	private String TipoUsuario;
 }

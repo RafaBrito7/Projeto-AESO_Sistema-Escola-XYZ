@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -36,11 +38,10 @@ public class Adm {
 	@Column(name = "data_vinculo")
 	@CreationTimestamp
 	private Date dataVinculo;
-
-	private String usuario;
-
-	private String senha;
-
+	
 	private Boolean permissao;
-
+	
+	@OneToOne
+	@JoinColumn(name = "id_credencial")
+	private Credencial usuario;
 }

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -39,13 +40,13 @@ public class Professor {
 	@CreationTimestamp
 	private Date dataVinculo;
 
-	private String usuario;
-
-	private String senha;
-
 	private Boolean permissao;
 
 	@ManyToOne
 	@JoinColumn(name = "id_disciplina")
 	private Disciplina disciplina;
+	
+	@OneToOne
+	@JoinColumn(name = "id_credencial")
+	private Credencial usuario;
 }

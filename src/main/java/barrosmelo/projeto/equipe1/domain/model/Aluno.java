@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -42,10 +43,6 @@ public class Aluno {
 	@CreationTimestamp
 	private Date dataVinculo;
 
-	private String usuario;
-
-	private String senha;
-
 	@Column(name = "numero_matricula")
 	private String numeroMatricula;
 
@@ -56,5 +53,8 @@ public class Aluno {
 	@ManyToMany
 	@JoinTable(name = "aluno_nota", joinColumns = @JoinColumn(name = "id_pessoa"), inverseJoinColumns = @JoinColumn(name = "id_nota"))
 	private List<Nota> notas;
-
+	
+	@OneToOne
+	@JoinColumn(name = "id_credencial")
+	private Credencial usuario;
 }

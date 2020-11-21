@@ -1,0 +1,1 @@
+const URL_LOGIN_PADRAO = 'localhost:8080/credenciais'
