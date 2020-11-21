@@ -187,10 +187,6 @@ form input {
   margin-right: 4px;
 }
 
-.form-inline small {
-  @include float-right;
-}
-
 #redefinir-senha{
   position: absolute;
   margin-top: 9px;
