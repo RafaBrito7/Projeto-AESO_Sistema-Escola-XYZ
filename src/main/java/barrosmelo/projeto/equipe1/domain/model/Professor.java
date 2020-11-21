@@ -48,5 +48,5 @@ public class Professor {
 	
 	@OneToOne
 	@JoinColumn(name = "id_credencial")
-	private Credencial usuario;
+	private Credencial credencial;
 }
