@@ -19,6 +19,6 @@ public class CredencialController {
 
 	@GetMapping("autenticar/{usuario}/{senha}")
 	public ResponseEntity<Credencial> autenticar(@PathVariable("usuario") String usuario, @PathVariable("senha") String senha) {
-		return ResponseEntity.ok(credencialService.autencicar(usuario, senha));
+		return ResponseEntity.ok(credencialService.autenticar(usuario, senha));
 	}
 }
