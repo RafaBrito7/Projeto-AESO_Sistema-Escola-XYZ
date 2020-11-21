@@ -1,29 +1,51 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-public class Professor extends Pessoa{
+import java.util.Date;
 
-	private Turma turma;
-	
-	private String permissao;
-	
-	public Professor() {
-		
-	}
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-	public Turma getTurma() {
-		return turma;
-	}
+import org.hibernate.annotations.CreationTimestamp;
 
-	public void setTurma(Turma turma) {
-		this.turma = turma;
-	}
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-	public String getPermissao() {
-		return permissao;
-	}
+@Entity
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Professor {
 
-	public void setPermissao(String permissao) {
-		this.permissao = permissao;
-	}
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_professor")
+	@EqualsAndHashCode.Include
+	private Long idProfessor;
+
+	private String nome;
+
+	@Column(name = "data_nascimento")
+	private Date dataNascimento;
+
+	private String cpf;
+
+	private Boolean vinculo;
+
+	@Column(name = "data_vinculo")
+	@CreationTimestamp
+	private Date dataVinculo;
+
+	private String usuario;
+
+	private String senha;
+
+	private Boolean permissao;
+
+	@ManyToOne
+	@JoinColumn(name = "id_disciplina")
+	private Disciplina disciplina;
 }

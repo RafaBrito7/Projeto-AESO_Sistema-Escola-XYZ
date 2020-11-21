@@ -1,12 +1,15 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Curso {
@@ -22,18 +25,22 @@ public class Curso {
 	@Column(name = "carga_horaria_total")
 	private Double cargaHorariaTotal;
 
-	@ManyToOne
-	@JoinColumn(name = "serieId")
-	private Serie serie;
+	@ManyToMany
+	@JoinTable(
+			name = "curso_turma",
+			joinColumns = @JoinColumn(name = "id_curso"),
+			inverseJoinColumns = @JoinColumn(name = "turma_id"))
+	private Set<Turma> turma;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "curso_disciplina",
+			joinColumns = @JoinColumn(name = "id_curso"),
+			inverseJoinColumns = @JoinColumn(name = "disciplina_id"))
+	private Set<Disciplina> disciplinas;
 
 	public Curso() {
 
-	}
-
-	public Curso(String nomeCurso, Double cargaHorarioTotal, Long serieId) {
-		this.nomeCurso = nomeCurso;
-		this.cargaHorariaTotal = cargaHorarioTotal;
-		this.serie.setSerieId(serieId);
 	}
 
 	public Long getId() {
@@ -60,12 +67,12 @@ public class Curso {
 		this.cargaHorariaTotal = cargaHorariaTotal;
 	}	
 
-	public Serie getSerie() {
-		return serie;
+	public Set<Turma> getTurma() {
+		return turma;
 	}
 
-	public void setSerie(Serie serie) {
-		this.serie = serie;
+	public void setTurma(Set<Turma> turma) {
+		this.turma = turma;
 	}
 
 	@Override

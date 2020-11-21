@@ -1,88 +1,60 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
-public class Aluno extends Pessoa {
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Aluno {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_aluno")
+	@EqualsAndHashCode.Include
+	private Long idAluno;
+
+	private String nome;
+
+	@Column(name = "data_nascimento")
+	private Date dataNascimento;
+
+	private String cpf;
+
+	private Boolean vinculo;
+
+	@Column(name = "data_vinculo")
+	@CreationTimestamp
+	private Date dataVinculo;
+
+	private String usuario;
+
+	private String senha;
 
 	@Column(name = "numero_matricula")
 	private String numeroMatricula;
-	private String turma; //Lembrar alterar tipo para Turma
-	private Double nota;
-	private String permissao; //Lembrar alterar tipo para EnumPermissao
 
-	public Aluno() {
+	@ManyToOne
+	@JoinColumn(name = "idTurma")
+	private Turma turma;
 
-	}
+	@ManyToMany
+	@JoinTable(name = "aluno_nota", joinColumns = @JoinColumn(name = "id_pessoa"), inverseJoinColumns = @JoinColumn(name = "id_nota"))
+	private List<Nota> notas;
 
-	public Aluno(String nome, String cpf, Date dataNascimento) {
-		super(nome, cpf, dataNascimento);
-	}
-
-	public Aluno(String nome, String cpf, Date dataNascimento, String numeroMatricula, Double nota) {
-		super(nome, cpf, dataNascimento);
-		this.numeroMatricula = numeroMatricula;
-		this.nota = nota;
-	}
-
-	public String getNumeroMatricula() {
-		return numeroMatricula;
-	}
-
-	public void setNumeroMatricula(String numeroMatricula) {
-		this.numeroMatricula = numeroMatricula;
-	}
-
-	public Double getNota() {
-		return nota;
-	}
-
-	public void setNota(Double nota) {
-		this.nota = nota;
-	}
-
-	public String getTurma() {
-		return turma;
-	}
-
-	public void setTurma(String turma) {
-		this.turma = turma;
-	}
-
-	public String getPermissao() {
-		return permissao;
-	}
-
-	public void setPermissao(String permissao) {
-		this.permissao = permissao;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((numeroMatricula == null) ? 0 : numeroMatricula.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		if (numeroMatricula == null) {
-			if (other.numeroMatricula != null)
-				return false;
-		} else if (!numeroMatricula.equals(other.numeroMatricula))
-			return false;
-		return true;
-	}
-	
 }

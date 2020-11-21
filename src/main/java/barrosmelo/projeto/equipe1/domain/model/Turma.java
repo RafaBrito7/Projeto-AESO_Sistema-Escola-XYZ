@@ -1,17 +1,36 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Turma {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_turma")
 	private Long idTurma;
-	
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
+	private Curso curso;
+
+	@Column(name = "nome_turma")
+	private String nomeTurma;
+
+	@Column(name = "ano_admissao")
 	private String anoAdmissao;
-	
+
 	private Integer vagas;
-	
-	private String ementa;
-	
+
 	public Turma() {
-		
+
 	}
 
 	public Long getIdTurma() {
@@ -38,12 +57,20 @@ public class Turma {
 		this.vagas = vagas;
 	}
 
-	public String getEmenta() {
-		return ementa;
+	public Curso getCurso() {
+		return curso;
 	}
 
-	public void setEmenta(String ementa) {
-		this.ementa = ementa;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}	
+
+	public String getNomeTurma() {
+		return nomeTurma;
+	}
+
+	public void setNomeTurma(String nomeTurma) {
+		this.nomeTurma = nomeTurma;
 	}
 
 	@Override
@@ -70,6 +97,5 @@ public class Turma {
 			return false;
 		return true;
 	}
-	
-	
+
 }

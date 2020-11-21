@@ -11,32 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import barrosmelo.projeto.equipe1.domain.model.Aluno;
-import barrosmelo.projeto.equipe1.domain.repository.AlunoRepository;
-import barrosmelo.projeto.equipe1.domain.service.AlunoService;
+import barrosmelo.projeto.equipe1.domain.model.Adm;
+import barrosmelo.projeto.equipe1.domain.repository.AdmRepository;
+import barrosmelo.projeto.equipe1.domain.service.AdmService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/alunos")
-public class AlunoController {
+@RequestMapping("/adm")
+public class AdmController {
 
 	@Autowired
-	private AlunoRepository alunoRepository;
-
+	private AdmService admService;
 	@Autowired
-	private AlunoService alunoServive;
+	private AdmRepository admRepository;
 
-	@ApiOperation("Deve permitir salvar um aluno no banco de dados.")
+	@ApiOperation("Deve permitir salvar um adm no banco de dados.")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Aluno salvar(@RequestBody Aluno aluno) {
-		return alunoServive.salvar(aluno);
+	public Adm salvar(@RequestBody Adm adm) {
+		return admService.salvar(adm);
 	}
 
-	@ApiOperation("Deve retornar uma lista de alunos")
+	@ApiOperation("Deve retornar uma lista de adms")
 	@GetMapping
-	@ResponseStatus(HttpStatus.OK)
-	public List<Aluno> lista() {
-		return alunoRepository.findAll();
+	@ResponseStatus(HttpStatus.CREATED)
+	public List<Adm> lista() {
+		return admRepository.findAll();
 	}
 }

@@ -11,32 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import barrosmelo.projeto.equipe1.domain.model.Aluno;
-import barrosmelo.projeto.equipe1.domain.repository.AlunoRepository;
-import barrosmelo.projeto.equipe1.domain.service.AlunoService;
+import barrosmelo.projeto.equipe1.domain.model.Disciplina;
+import barrosmelo.projeto.equipe1.domain.repository.DisciplinaRepository;
+import barrosmelo.projeto.equipe1.domain.service.DisciplinaService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/alunos")
-public class AlunoController {
+@RequestMapping("/disciplina")
+public class DisciplinaController {
 
 	@Autowired
-	private AlunoRepository alunoRepository;
+	private DisciplinaRepository disciplinaRepository;
 
 	@Autowired
-	private AlunoService alunoServive;
+	private DisciplinaService disciplinaService;
 
-	@ApiOperation("Deve permitir salvar um aluno no banco de dados.")
+	@ApiOperation("Deve permitir salvar uma diciplina no banco de dados.")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Aluno salvar(@RequestBody Aluno aluno) {
-		return alunoServive.salvar(aluno);
+	public Disciplina salvar(@RequestBody Disciplina disciplina) {
+		return disciplinaService.salvar(disciplina);
 	}
 
-	@ApiOperation("Deve retornar uma lista de alunos")
+	@ApiOperation("Deve retornar uma lista de disciplinas")
 	@GetMapping
-	@ResponseStatus(HttpStatus.OK)
-	public List<Aluno> lista() {
-		return alunoRepository.findAll();
+	public List<Disciplina> listar() {
+		return disciplinaRepository.findAll();
 	}
 }

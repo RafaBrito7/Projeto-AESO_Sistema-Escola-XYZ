@@ -1,18 +1,46 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-public class Adm extends Pessoa{
+import java.util.Date;
 
-	private String permissao;
-	
-	public Adm() {
-		
-	}
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-	public String isPermissao() {
-		return permissao;
-	}
+import org.hibernate.annotations.CreationTimestamp;
 
-	public void setPermissao(String permissao) {
-		this.permissao = permissao;
-	}	
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Entity
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Adm {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_adm")
+	@EqualsAndHashCode.Include
+	private Long idAdm;
+
+	private String nome;
+
+	@Column(name = "data_nascimento")
+	private Date dataNascimento;
+
+	private String cpf;
+
+	private Boolean vinculo;
+
+	@Column(name = "data_vinculo")
+	@CreationTimestamp
+	private Date dataVinculo;
+
+	private String usuario;
+
+	private String senha;
+
+	private Boolean permissao;
+
 }

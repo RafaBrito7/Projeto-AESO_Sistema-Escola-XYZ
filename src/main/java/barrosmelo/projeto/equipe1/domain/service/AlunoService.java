@@ -15,6 +15,4 @@ public class AlunoService {
 	public Aluno salvar(Aluno aluno) {
 		return alunoRepository.save(aluno);
 	}
-	
-	
 }
