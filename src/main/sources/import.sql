@@ -10,17 +10,17 @@ insert into sistema_escolar_xyz.disciplina (carga_horaria, nome_disciplina, id_t
 insert into sistema_escolar_xyz.disciplina (carga_horaria, nome_disciplina, id_turma) values (1200, 'Matemática', 2);
 insert into sistema_escolar_xyz.disciplina (carga_horaria, nome_disciplina, id_turma) values (2000, 'Língua Portuguesa', 3);
 
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'ester.lopes', '123456');
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'teresinha.farias', '123456');
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'benjamin.moura', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'ester.lopes', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'teresinha.farias', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'benjamin.moura', '123456');
 
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'fabio.lima', '123456');
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'priscila.galvao', '123456');
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'lorenzo.cunha', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'fabio.lima', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'priscila.galvao', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'lorenzo.cunha', '123456');
 
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'fernando.castro', '123456');
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'benedita.silva', '123456');
-insert into sistema_escolar_xyz.usuario (tipo_usuario, usuario, senha) values ('adm', 'debora.barros', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'fernando.castro', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'benedita.silva', '123456');
+insert into sistema_escolar_xyz.credencial (tipo_usuario, usuario, senha) values ('adm', 'debora.barros', '123456');
 
 insert into sistema_escolar_xyz.adm (nome, cpf, vinculo, permissao, id_credencial) values ('Teresinha Aparecida Gabrielly Farias', '96147101285', 1, TRUE, 1);
 insert into sistema_escolar_xyz.adm (nome, cpf, vinculo, permissao, id_credencial) values ('Ester Rita Eduarda Lopes', '95026566790', 1, TRUE, 2);

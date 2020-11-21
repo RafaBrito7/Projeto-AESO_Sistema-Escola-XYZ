@@ -43,5 +43,5 @@ public class Adm {
 	
 	@OneToOne
 	@JoinColumn(name = "id_credencial")
-	private Credencial usuario;
+	private Credencial credencial;
 }
