@@ -11,31 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import barrosmelo.projeto.equipe1.domain.model.Pessoa;
-import barrosmelo.projeto.equipe1.domain.repository.PessoaRepository;
-import barrosmelo.projeto.equipe1.domain.service.PessoaService;
+import barrosmelo.projeto.equipe1.domain.model.Adm;
+import barrosmelo.projeto.equipe1.domain.repository.AdmRepository;
+import barrosmelo.projeto.equipe1.domain.service.AdmService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/pessoa")
-public class PessoaController {
+@RequestMapping("/adm")
+public class AdmController {
 
 	@Autowired
-	private PessoaRepository pessoaRepository;
-
+	private AdmService admService;
 	@Autowired
-	private PessoaService pessoaService;
-	
-	@ApiOperation("Deve retornar uma lista de pessoas")
-	@GetMapping
-	public List<Pessoa> listar() {
-		return pessoaRepository.findAll();
-	}
+	private AdmRepository admRepository;
 
-	@ApiOperation("Deve salvar uma pessoa")
+	@ApiOperation("Deve permitir salvar um adm no banco de dados.")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Pessoa salvar(@RequestBody Pessoa pessoa) {
-		return pessoaService.salvar(pessoa);
+	public Adm salvar(@RequestBody Adm adm) {
+		return admService.salvar(adm);
+	}
+
+	@ApiOperation("Deve retornar uma lista de adms")
+	@GetMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public List<Adm> lista() {
+		return admRepository.findAll();
 	}
 }

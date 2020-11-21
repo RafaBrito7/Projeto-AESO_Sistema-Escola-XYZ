@@ -3,9 +3,9 @@ package barrosmelo.projeto.equipe1.domain.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import barrosmelo.projeto.equipe1.domain.model.Pessoa;
+import barrosmelo.projeto.equipe1.domain.model.Disciplina;
 
 @Repository
-public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
+public interface DisciplinaRepository extends JpaRepository<Disciplina, Long>{
 
 }

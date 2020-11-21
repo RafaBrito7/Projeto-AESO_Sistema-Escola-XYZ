@@ -1,39 +1,51 @@
 package barrosmelo.projeto.equipe1.domain.model;
 
-import java.util.List;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
-public class Professor extends Pessoa{
-	
-	private String permissao;
-	
-	@ManyToMany
-	@JoinTable(name = "turma_professor", joinColumns = @JoinColumn(name = "professor_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "turma_id", nullable = false))
-	private List<Turma> turmas;
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Professor {
 
-	
-	public Professor() {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_professor")
+	@EqualsAndHashCode.Include
+	private Long idProfessor;
 
-	}
+	private String nome;
 
-	public String getPermissao() {
-		return permissao;
-	}
+	@Column(name = "data_nascimento")
+	private Date dataNascimento;
 
-	public void setPermissao(String permissao) {
-		this.permissao = permissao;
-	}
+	private String cpf;
 
-	public List<Turma> getTurmas() {
-		return turmas;
-	}
+	private Boolean vinculo;
 
-	public void setTurmas(List<Turma> turmas) {
-		this.turmas = turmas;
-	}
+	@Column(name = "data_vinculo")
+	@CreationTimestamp
+	private Date dataVinculo;
+
+	private String usuario;
+
+	private String senha;
+
+	private Boolean permissao;
+
+	@ManyToOne
+	@JoinColumn(name = "id_disciplina")
+	private Disciplina disciplina;
 }
