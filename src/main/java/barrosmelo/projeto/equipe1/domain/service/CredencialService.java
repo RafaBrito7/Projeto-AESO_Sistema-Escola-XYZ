@@ -11,10 +11,11 @@ public class CredencialService {
 
 	@Autowired
 	private CredencialRepository credencialRepository;
-	
+
 	public Credencial autenticar(Credencial credencial) {
-		if(credencial.getUsuario() != null && credencial.getSenha() != null) {
-			return credencialRepository.findByUsuarioAndSenha(credencial.getUsuario(), credencial.getSenha());			
+
+		if (credencial.getUsuario() != null && credencial.getSenha() != null) {
+			return credencialRepository.findByUsuarioAndSenha(credencial.getUsuario(), credencial.getSenha());
 		}
 		return null;
 	}
