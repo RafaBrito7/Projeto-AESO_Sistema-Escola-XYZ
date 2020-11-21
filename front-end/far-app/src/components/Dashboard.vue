@@ -8,23 +8,22 @@
             <form style="width: 300px;">
                 <div class="form-group" style="text-align: left;">
                         <label for="input-name">Usuário</label>
-                        <input type="text" class="form-control" id="input-name" v-model="credencial.name"
+                        <input type="text" class="form-control" id="input-name"
                             placeholder="Nome de usuário cadastrado" maxlength="50">
                             <p v-if="false" style="color: red; text-align: center">Usuário Incorreto!</p>
                     </div>
                     <div>
                     <label for="input-senha">Senha</label>
-                    <input type="password" class="form-control" id="input-senha" v-model="credencial.senha"
+                    <input type="password" class="form-control" id="input-senha"
                     minlength="5" maxlength="15">
                     <p v-if="false" style="color: red; text-align: center">Senha Incorreta!</p>
                 </div>
                 <div class="form-group form-check" style="padding: 5px;">
-                    <label class="radio-inline" style="margin-right: 5px;"><input type="radio" name="optradio" value="aluno" v-model="credencial.funcao">Aluno</label>
-                    <label class="radio-inline" style="margin-right: 5px;"><input type="radio" name="optradio" value="administrador" v-model="credencial.funcao">Administrador</label>
-                    <label class="radio-inline"><input type="radio" name="optradio" value="professor" v-model="credencial.funcao">Professor</label>
+                    <label class="radio-inline" style="margin-right: 5px;"><input type="radio" name="optradio" value="aluno">Aluno</label>
+                    <label class="radio-inline" style="margin-right: 5px;"><input type="radio" name="optradio" value="administrador">Administrador</label>
+                    <label class="radio-inline"><input type="radio" name="optradio" value="professor">Professor</label>
                 </div>
-                <button type="submit" class="btn btn-primary" @click="autenticar()" 
-                v-bind:disabled="credencial.name == null || credencial.senha == null || credencial.funcao == null" >Enviar</button>
+                <button type="submit" class="btn btn-primary" @click="autenticar()">Enviar</button>
             </form>
         </div>
     </div>
@@ -38,20 +37,12 @@ export default {
   },
   data() {
     return {
-      credencial: {
-        name: null,
-        senha: null,
-        funcao: null
-      }
+      name
     }
   },
   methods: {
     autenticar() {
-      if (this.credencial.name != null && this.credencial.senha != null && this.credencial.funcao != null) {
-        
-      } else{
-        
-      }      
+      console.log('Autenticar')
     }
   }
 }
