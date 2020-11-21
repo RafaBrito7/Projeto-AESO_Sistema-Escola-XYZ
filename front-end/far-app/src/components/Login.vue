@@ -11,8 +11,8 @@
                         <input type="text" class="form-control" id="input-name" v-model="credencial.name"
                             placeholder="Nome de usuário cadastrado" maxlength="50">
                             <p v-if="false" style="color: red; text-align: center">Usuário Incorreto!</p>
-                    </div>
-                    <div>
+                </div>
+                <div>
                     <label for="input-senha">Senha</label>
                     <input type="password" class="form-control" id="input-senha" v-model="credencial.senha"
                     minlength="5" maxlength="15">
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import loginService from '../service/loginService';
+
 export default {
   name: 'login',
   props: {
@@ -48,9 +50,16 @@ export default {
   methods: {
     autenticar() {
       if (this.credencial.name != null && this.credencial.senha != null && this.credencial.funcao != null) {
+        loginService.autenticate(this.credencial)
+        .then(data => {
+          console.log(data);
+          alert('Logado!');})
+          .catch(data => {
+            console.log(data);
+            alert('Logado!');});
         
       } else{
-        
+        alert('Login Faiou');
       }      
     }
   }
