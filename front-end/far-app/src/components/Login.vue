@@ -142,6 +142,7 @@ html {
   width: 600px;
   height: 500px;
   border-radius: 50px;
+  margin-top: 60px;
 }
 
 #div-img-logo {

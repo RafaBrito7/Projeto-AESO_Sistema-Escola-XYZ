@@ -14,7 +14,7 @@ import { faTimes, faUser, faUnlockAlt} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 
-import router from './router';
+import router from '../src/router.js';
 
 library.add(faTimes, faUser, faUnlockAlt);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
