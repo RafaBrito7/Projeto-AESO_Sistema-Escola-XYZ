@@ -39,11 +39,13 @@ public class CursoController {
 		return cursoService.salvar(curso);
 	}
 
+	@ApiOperation("Deve retornar uma lista de cursos")
 	@GetMapping
 	public List<Curso> listar() {
 		return cursoRepository.findAll();
 	}
 
+	@ApiOperation("Deve retornar um curso de um id específico")
 	@GetMapping("/{idCurso}")
 	public ResponseEntity<Curso> buscar(@PathVariable Long idCurso) {
 		Optional<Curso> cursoEncontrado = cursoRepository.findById(idCurso);
@@ -55,6 +57,7 @@ public class CursoController {
 		return ResponseEntity.notFound().build();
 	}
 
+	@ApiOperation("Deve atualizar um curso de id específico")
 	@PutMapping("/{idCurso}")
 	public ResponseEntity<Curso> atualizarCurso(@PathVariable Long idCurso, @RequestBody Curso cursoAtualizado) {
 		Optional<Curso> cursoExistente = cursoRepository.findById(idCurso);
@@ -68,6 +71,7 @@ public class CursoController {
 		return ResponseEntity.notFound().build();
 	}
 
+	@ApiOperation("Deve excluir um curso com um id específico")
 	@DeleteMapping("/{idCurso}")
 	public ResponseEntity<Curso> remover(@PathVariable Long idCurso) {
 		Optional<Curso> cursoEncontrado = cursoRepository.findById(idCurso);

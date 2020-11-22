@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import barrosmelo.projeto.equipe1.domain.model.Credencial;
 import barrosmelo.projeto.equipe1.domain.repository.CredencialRepository;
 import barrosmelo.projeto.equipe1.domain.service.CredencialService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/credenciais")
@@ -25,7 +26,9 @@ public class CredencialController {
 	@Autowired
 	private CredencialRepository credencialRepository;
 
+	@ApiOperation("Deve retornar uma credencial se o usuario e senha passado pelo cliente for válido")
 	@PostMapping
+	@GetMapping
 	public ResponseEntity<Credencial> autenticar(@RequestBody Credencial credencial) {
 		Credencial credencialEncontrada = credencialService.autenticar(credencial);
 
@@ -36,6 +39,7 @@ public class CredencialController {
 		return ResponseEntity.badRequest().build();
 	}
 
+	@ApiOperation("Deve retornar uma lista de credenciais")
 	@GetMapping
 	public List<Credencial> listar() {
 		List<Credencial> crs = credencialRepository.findAll();
