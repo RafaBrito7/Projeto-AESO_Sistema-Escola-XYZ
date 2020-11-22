@@ -25,4 +25,38 @@ public class Credencial {
 	private String senha;
 	
 	private String TipoUsuario;
+
+	public Long getIdCredencial() {
+		return idCredencial;
+	}
+
+	public void setIdCredencial(Long idCredencial) {
+		this.idCredencial = idCredencial;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getTipoUsuario() {
+		return TipoUsuario;
+	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		TipoUsuario = tipoUsuario;
+	}
+	
+	
 }

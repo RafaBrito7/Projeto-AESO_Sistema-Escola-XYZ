@@ -89,7 +89,6 @@
 </template>
 
 <script>
-import loginService from "../service/loginService";
 
 export default {
   name: "login",
@@ -112,6 +111,7 @@ export default {
         this.credencial.senha != null &&
         this.credencial.funcao != null
       ) {
+        /*
         loginService
           .autenticate(this.credencial)
           .then((data) => {
@@ -122,6 +122,8 @@ export default {
             console.log(data);
             alert("Logado!");
           });
+          */
+         this.$router.push('dashboard-aluno');
       } else {
         alert("Login Faiou");
       }
