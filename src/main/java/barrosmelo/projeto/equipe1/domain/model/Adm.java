@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -26,11 +30,18 @@ public class Adm {
 	@EqualsAndHashCode.Include
 	private Long idAdm;
 
+	@NotNull
+	@NotEmpty
+	@NotBlank
 	private String nome;
 
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
-
+	
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(max = 11)
 	private String cpf;
 
 	private Boolean vinculo;
@@ -39,8 +50,10 @@ public class Adm {
 	@CreationTimestamp
 	private Date dataVinculo;
 	
+	@NotNull
 	private Boolean permissao;
 	
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "id_credencial")
 	private Credencial credencial;

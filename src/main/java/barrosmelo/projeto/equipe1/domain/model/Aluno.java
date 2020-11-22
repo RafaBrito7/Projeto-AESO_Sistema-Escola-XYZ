@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -35,6 +36,7 @@ public class Aluno {
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
+	@Size(max = 11)
 	private String cpf;
 
 	private Boolean vinculo;
