@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import barrosmelo.projeto.equipe1.api.exception.EntidadeEmUsoException;
 import barrosmelo.projeto.equipe1.api.exception.EntidadeNaoEncontradaException;
 import barrosmelo.projeto.equipe1.api.exception.RestricoesVioladasException;
 
@@ -49,6 +50,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 		problema = createProblemBuilder(status, tipoProblema, detalhe);
 		return handleExceptionInternal(e, problema, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+	}
+
+	@ExceptionHandler(EntidadeEmUsoException.class)
+	public ResponseEntity<?> handleEntidadeEmUsoException(EntidadeEmUsoException e,
+			WebRequest request) {
+		status = HttpStatus.CONFLICT;
+		tipoProblema = TipoProblema.ENTIDADE_EM_USO;
+		detalhe = e.getMessage();
+
+		problema = createProblemBuilder(status, tipoProblema, detalhe);
+		return handleExceptionInternal(e, problema, new HttpHeaders(), HttpStatus.CONFLICT, request);
 	}
 
 	private Problema createProblemBuilder(HttpStatus status, TipoProblema tipoProblema, String detail) {

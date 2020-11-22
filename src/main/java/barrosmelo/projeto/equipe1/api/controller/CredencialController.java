@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,8 +52,17 @@ public class CredencialController {
 	public ResponseEntity<Credencial> atualizar(@PathVariable Long idCredencial, @RequestBody @Valid Credencial credencial) {
 		Credencial credencialEncontrada = credencialService.verificarExistencia(idCredencial);
 		
-		BeanUtils.copyProperties(credencial, credencialEncontrada, "id", "tipoUsuario");
+		BeanUtils.copyProperties(credencial, credencialEncontrada, "id");
 		
-		return ResponseEntity.ok(credencialService.salvar(credencialEncontrada));
+		Credencial credencialSalva = credencialService.salvar(credencialEncontrada);
+		
+		return ResponseEntity.ok(credencialSalva);
+	}
+	
+	@ApiOperation("Deve excluir uma credencial a partir de um id específico.")
+	@DeleteMapping("{idCredencial}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void excluir(@PathVariable Long idCredencial) {
+		credencialService.excluir(idCredencial);
 	}
 }
