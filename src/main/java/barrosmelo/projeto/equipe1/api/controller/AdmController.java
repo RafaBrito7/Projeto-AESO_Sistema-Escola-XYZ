@@ -41,7 +41,7 @@ public class AdmController {
 
 	@ApiOperation("Deve retornar uma lista de adms")
 	@GetMapping
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.OK)
 	public List<Adm> lista() {
 		return admRepository.findAll();
 	}
