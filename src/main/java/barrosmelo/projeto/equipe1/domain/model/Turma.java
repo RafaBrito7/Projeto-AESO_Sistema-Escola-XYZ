@@ -2,7 +2,6 @@ package barrosmelo.projeto.equipe1.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +16,7 @@ public class Turma {
 	@Column(name = "id_turma")
 	private Long idTurma;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
 	private Curso curso;
 
@@ -63,7 +62,7 @@ public class Turma {
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
-	}	
+	}
 
 	public String getNomeTurma() {
 		return nomeTurma;

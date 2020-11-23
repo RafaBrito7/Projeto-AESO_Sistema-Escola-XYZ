@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import barrosmelo.projeto.equipe1.api.exception.EntidadeNaoEncontradaException;
 import barrosmelo.projeto.equipe1.domain.model.Curso;
 import barrosmelo.projeto.equipe1.domain.repository.CursoRepository;
 import barrosmelo.projeto.equipe1.domain.service.CursoService;
@@ -39,44 +40,48 @@ public class CursoController {
 		return cursoService.salvar(curso);
 	}
 
+	@ApiOperation("Deve retornar uma lista de cursos")
 	@GetMapping
 	public List<Curso> listar() {
 		return cursoRepository.findAll();
 	}
 
+	@ApiOperation("Deve retornar um curso de um id específico")
 	@GetMapping("/{idCurso}")
 	public ResponseEntity<Curso> buscar(@PathVariable Long idCurso) {
 		Optional<Curso> cursoEncontrado = cursoRepository.findById(idCurso);
 
-		if (cursoEncontrado.isPresent()) {
-			return ResponseEntity.ok(cursoEncontrado.get());
+		if (!cursoEncontrado.isPresent()) {
+			throw new EntidadeNaoEncontradaException(idCurso);
 		}
 
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(cursoEncontrado.get());
 	}
 
+	@ApiOperation("Deve atualizar um curso de id específico")
 	@PutMapping("/{idCurso}")
 	public ResponseEntity<Curso> atualizarCurso(@PathVariable Long idCurso, @RequestBody Curso cursoAtualizado) {
 		Optional<Curso> cursoExistente = cursoRepository.findById(idCurso);
 
-		if (cursoExistente.isPresent()) {
-			BeanUtils.copyProperties(cursoAtualizado, cursoExistente.get(), "id");
-			cursoService.salvar(cursoExistente.get());
-			return ResponseEntity.ok(cursoExistente.get());
+		if (!cursoExistente.isPresent()) {
+			throw new EntidadeNaoEncontradaException(idCurso);
 		}
 
-		return ResponseEntity.notFound().build();
+		BeanUtils.copyProperties(cursoAtualizado, cursoExistente.get(), "id");
+		cursoService.salvar(cursoExistente.get());
+		return ResponseEntity.ok(cursoExistente.get());
 	}
 
+	@ApiOperation("Deve excluir um curso com um id específico")
 	@DeleteMapping("/{idCurso}")
 	public ResponseEntity<Curso> remover(@PathVariable Long idCurso) {
 		Optional<Curso> cursoEncontrado = cursoRepository.findById(idCurso);
 
-		if (cursoEncontrado.isPresent()) {
-			cursoService.remover(idCurso);
-			return ResponseEntity.noContent().build();
+		if (!cursoEncontrado.isPresent()) {
+			throw new EntidadeNaoEncontradaException(idCurso);
 		}
 
-		return ResponseEntity.notFound().build();
+		cursoService.excluir(idCurso);
+		return ResponseEntity.noContent().build();
 	}
 }

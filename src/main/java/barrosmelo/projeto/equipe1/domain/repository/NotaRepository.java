@@ -7,5 +7,5 @@ import barrosmelo.projeto.equipe1.domain.model.Nota;
 
 @Repository
 public interface NotaRepository extends JpaRepository<Nota, Long>{
-
+	
 }

@@ -114,7 +114,8 @@ export default {
       ) {
         
         loginService
-          .autenticate(this.credencial)
+          //.autenticate(this.credencial)
+          .listar()
           .then((data) => {
             console.log(data);
             alert("Logado!");
