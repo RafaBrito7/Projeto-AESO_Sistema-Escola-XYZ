@@ -13,7 +13,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTimes, faUser, faUnlockAlt} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-
 import router from '../src/router.js';
 
 library.add(faTimes, faUser, faUnlockAlt);
