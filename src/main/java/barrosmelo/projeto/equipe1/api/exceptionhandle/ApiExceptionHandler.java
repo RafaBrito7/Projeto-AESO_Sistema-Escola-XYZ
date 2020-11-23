@@ -1,5 +1,7 @@
 package barrosmelo.projeto.equipe1.api.exceptionhandle;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +64,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		problema = createProblemBuilder(status, tipoProblema, detalhe);
 		return handleExceptionInternal(e, problema, new HttpHeaders(), HttpStatus.CONFLICT, request);
 	}
+	
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<?> handleEntidadeEmUsoException(ConstraintViolationException e,
+			WebRequest request) {
+		status = HttpStatus.BAD_REQUEST;
+		tipoProblema = TipoProblema.ERRO_DE_VALIDACAO;
+		detalhe = e.getMessage();
+
+		problema = createProblemBuilder(status, tipoProblema, detalhe);
+		return handleExceptionInternal(e, problema, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
+	
 
 	private Problema createProblemBuilder(HttpStatus status, TipoProblema tipoProblema, String detail) {
 		return new Problema(status.value(), tipoProblema.getUri(), tipoProblema.getTitulo(), detalhe);

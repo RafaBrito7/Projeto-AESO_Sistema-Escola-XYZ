@@ -2,16 +2,11 @@ package barrosmelo.projeto.equipe1.api.exceptionhandle;
 
 public enum TipoProblema {
 
-	RECURSO_NAO_ENCONTRADO("/recurso-nao-encontrado", "recurso não encontrado"),
 	ERRO_DE_REQUISICAO("/erro-de-requisicao", "Erro de requisição"),
-	MENSAGEM_INCOMPREENSIVEL("/mensagem-incompreensivel","mensagem incompreensível"),
-	PROPRIEDADE_IGNORADA("/propriedade-ignorada","Propriedade ignorada"),
-	PARAMETRO_INVALIDO("/parametro-invalido", "Parâmetro inválido"),
-	ERRO_NO_ARGUMENTO_DA_URI("/erro-no-argumento-da-uri","Erro no argumento da URI"),
-	ERRO_DE_SISTEMA("/erro-de-sistema","Erro de sistema"),
 	ENTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"),
 	ENTIDADE_NAO_ENCONTRADA("entidade-nao-encontrada", "Entidade não encontrada"),
-	RESTRICOES_VIOLADAS("/restricoes-violadas", "Restrições violadas");
+	RESTRICOES_VIOLADAS("/restricoes-violadas", "Restrições violadas"),
+	ERRO_DE_VALIDACAO("/erro-de-validacao", "Erro de validação");
 	
 	private String titulo;
 	private String uri;

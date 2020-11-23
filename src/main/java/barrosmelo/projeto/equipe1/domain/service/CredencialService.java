@@ -13,7 +13,7 @@ import barrosmelo.projeto.equipe1.domain.model.Credencial;
 import barrosmelo.projeto.equipe1.domain.repository.CredencialRepository;
 
 @Service
-public class CredencialService {
+public class CredencialService implements ICredencialService {
 
 	@Autowired
 	private CredencialRepository credencialRepository;
