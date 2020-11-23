@@ -17,10 +17,6 @@ public class CredencialService {
 
 	@Autowired
 	private CredencialRepository credencialRepository;
-	
-	private static final String MSG_ENTIDADE_NAO_ENCONTRADA = "Não existe credencial cadastrada com o id %d.";
-	
-	private static final String MSG_ENTIDADE_EM_USO = "A credencial de id %d está em uso.";
 
 	public Credencial autenticar(Credencial credencial) {
 
@@ -38,19 +34,19 @@ public class CredencialService {
 		Optional<Credencial> credencial = credencialRepository.findById(id);
 
 		if (!credencial.isPresent()) {
-			throw new EntidadeNaoEncontradaException(String.format(MSG_ENTIDADE_NAO_ENCONTRADA, id));
+			throw new EntidadeNaoEncontradaException(id);
 		}
 
 		return credencial.get();
 	}
-	
+
 	public void excluir(Long id) {
 		try {
-			credencialRepository.deleteById(id);			
-		}catch(DataIntegrityViolationException  e) {
-			throw new EntidadeEmUsoException(String.format(MSG_ENTIDADE_EM_USO, id));
-		}catch(EmptyResultDataAccessException e) {
-			throw new EntidadeNaoEncontradaException(String.format(MSG_ENTIDADE_NAO_ENCONTRADA, id));
+			credencialRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new EntidadeEmUsoException(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new EntidadeNaoEncontradaException(id);
 		}
 	}
 }
