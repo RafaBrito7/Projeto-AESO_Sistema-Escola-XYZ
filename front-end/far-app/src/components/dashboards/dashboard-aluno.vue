@@ -151,16 +151,6 @@ export default {
     deslogar() {
       this.$router.push("login");
     },
-   /* popularAluno(){
-      return 
-      "aluno": {
-        "nome": "Rafael Brito",
-        "funcao": "Aluno",
-        "cpf": "999.999.999-99",
-        "turma": "2º Ano",
-        "matricula": "2020ano20102"
-      };
-    } */
   },
 };
 </script>

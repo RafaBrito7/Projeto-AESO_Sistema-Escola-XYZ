@@ -5,9 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Credencial {
@@ -17,20 +14,11 @@ public class Credencial {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCredencial;
 
-	@NotBlank
-	@NotEmpty
-	@NotNull
 	private String usuario;
 
-	@NotBlank
-	@NotEmpty
-	@NotNull
 	private String senha;
 
-	@NotBlank
-	@NotEmpty
-	@NotNull
-	private String TipoUsuario;
+	private String tipoUsuario;
 
 	public Credencial() {
 
@@ -61,11 +49,11 @@ public class Credencial {
 	}
 
 	public String getTipoUsuario() {
-		return TipoUsuario;
+		return tipoUsuario;
 	}
 
 	public void setTipoUsuario(String tipoUsuario) {
-		TipoUsuario = tipoUsuario;
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	@Override
@@ -96,6 +84,6 @@ public class Credencial {
 	@Override
 	public String toString() {
 		return "Credencial [idCredencial=" + idCredencial + ", usuario=" + usuario + ", senha=" + senha
-				+ ", TipoUsuario=" + TipoUsuario + "]";
+				+ ", TipoUsuario=" + tipoUsuario + "]";
 	}
 }

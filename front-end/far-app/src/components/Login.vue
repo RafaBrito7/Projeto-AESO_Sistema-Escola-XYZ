@@ -8,7 +8,7 @@
       />
     </div>
     <div class="d-flex justify-content-center">
-      <form>
+      <div id="form">
         <div class="form-group">
           <font-awesome-icon icon="user" />
           <label for="input-name"> Usuário</label>
@@ -18,7 +18,7 @@
             id="input-name"
             placeholder="Nome de usuário cadastrado"
             maxlength="50"
-            v-model="credencial.name"
+            v-model="credencial.usuario"
           />
           <p v-show="false">
             <font-awesome-icon icon="times" /> Usuário Incorreto!
@@ -44,7 +44,7 @@
               type="radio"
               name="optradio"
               value="aluno"
-              v-model="credencial.funcao"
+              v-model="credencial.tipoUsuario"
             />Aluno</label
           >
           <label class="radio-inline"
@@ -52,7 +52,7 @@
               type="radio"
               name="optradio"
               value="administrador"
-              v-model="credencial.funcao"
+              v-model="credencial.tipoUsuario"
             />Administrador</label
           >
           <label class="radio-inline"
@@ -60,7 +60,7 @@
               type="radio"
               name="optradio"
               value="professor"
-              v-model="credencial.funcao"
+              v-model="credencial.tipoUsuario"
             />Professor</label
           >
         </div>
@@ -71,25 +71,29 @@
               class="btn btn-primary"
               @click="autenticar()"
               v-bind:disabled="
-                credencial.name == null ||
+                credencial.usuario == null ||
                 credencial.senha == null ||
-                credencial.funcao == null
+                credencial.tipoUsuario == null
               "
             >
               Enviar
             </button>
           </div>
           <div class="col-md-6">
-            <small id="redefinir-senha"> <a href="https://mail.google.com/" target="_blank">Esqueceu a sua Senha?</a> </small>
+            <small id="redefinir-senha">
+              <a href="https://mail.google.com/" target="_blank"
+                >Esqueceu a sua Senha?</a
+              >
+            </small>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import loginService from '../service/loginService';
+import loginService from "../service/loginService";
 
 export default {
   name: "login",
@@ -99,31 +103,28 @@ export default {
   data() {
     return {
       credencial: {
-        name: null,
+        usuario: null,
         senha: null,
-        funcao: null,
+        tipoUsuario: null,
       },
     };
   },
   methods: {
     autenticar() {
       if (
-        this.credencial.name != null &&
+        this.credencial.usuario != null &&
         this.credencial.senha != null &&
-        this.credencial.funcao != null
+        this.credencial.tipoUsuario != null
       ) {
-        
         loginService
-          //.autenticate(this.credencial)
-          .listar()
+          .autenticate(this.credencial)
           .then((data) => {
-            console.log(data);
-            alert("Logado!");
-            this.$router.push('dashboard-aluno');
+            this.credencial = data;
+            this.$router.push("dashboard-aluno");
           })
-          .catch((data) => {
-            console.log(data);
-            alert("Logado!");
+          .catch((error) => {
+            console.log(error);
+            alert("Login Faiou");
           });
       } else {
         alert("Login Faiou");
@@ -156,16 +157,16 @@ html {
   margin-top: 20px;
 }
 
-form {
+#form {
   margin-top: 20px;
   width: 350px;
 }
 
-form label {
+#form label {
   padding: 3px;
 }
 
-form input {
+#form input {
   padding: 3px;
 }
 
@@ -191,7 +192,7 @@ form input {
   margin-right: 4px;
 }
 
-#redefinir-senha{
+#redefinir-senha {
   position: absolute;
   margin-top: 9px;
   margin-left: 20px;

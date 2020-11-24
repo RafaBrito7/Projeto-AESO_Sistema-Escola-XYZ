@@ -14,5 +14,4 @@ export default new Router({
         path: "/dashboard-aluno",
         component: Dashboard
     }]
-    
 });
