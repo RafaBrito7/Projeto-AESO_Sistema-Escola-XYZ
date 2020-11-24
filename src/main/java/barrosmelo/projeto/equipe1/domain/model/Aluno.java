@@ -20,6 +20,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Aluno {
 
@@ -33,6 +35,7 @@ public class Aluno {
 	@NotNull
 	private String nome;
 
+	@JsonIgnore
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
@@ -42,8 +45,13 @@ public class Aluno {
 	@Size(max = 11)
 	private String cpf;
 
+	@JsonIgnore
 	private Boolean vinculo;
+	
+	@Column(name = "is_logado")
+	private Boolean isLogado;
 
+	@JsonIgnore
 	@Column(name = "data_vinculo")
 	@CreationTimestamp
 	private Date dataVinculo;
@@ -58,16 +66,18 @@ public class Aluno {
 	@JoinColumn(name = "idTurma")
 	private Turma turma;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "aluno_nota", joinColumns = @JoinColumn(name = "id_pessoa"), inverseJoinColumns = @JoinColumn(name = "id_nota"))
 	private List<Nota> notas;
 
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "id_credencial")
 	private Credencial credencial;
 
 	public Aluno() {
-
+		this.isLogado = false;
 	}
 
 	public Long getIdAluno() {
@@ -148,6 +158,14 @@ public class Aluno {
 
 	public void setCredencial(Credencial credencial) {
 		this.credencial = credencial;
+	}	
+
+	public Boolean getIsLogado() {
+		return isLogado;
+	}
+
+	public void setIsLogado(Boolean isLogado) {
+		this.isLogado = isLogado;
 	}
 
 	@Override

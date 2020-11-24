@@ -34,6 +34,9 @@ public class CredencialController {
 	@Autowired
 	private CredencialRepository credencialRepository;
 
+	@Autowired
+	private CredencialRepository credencialRepository;
+
 	@ApiOperation("Deve retornar uma credencial se o usuario e senha passado pelo cliente for válido")
 	@PostMapping("/autenticar")
 	public ResponseEntity<Credencial> autenticar(@RequestBody @Valid Credencial credencial) {
@@ -52,19 +55,25 @@ public class CredencialController {
 	public Credencial salvar(@RequestBody @Valid Credencial credencial) {
 		return credencialService.salvar(credencial);
 	}
-	
+
+	@GetMapping
+	public List<Credencial> listar() {
+		return credencialRepository.findAll();
+	}
+
 	@ApiOperation("Deve permitir atualizar uma credencial a partir de um id específico.")
 	@PutMapping("/{idCredencial}")
-	public ResponseEntity<Credencial> atualizar(@PathVariable Long idCredencial, @RequestBody @Valid Credencial credencial) {
+	public ResponseEntity<Credencial> atualizar(@PathVariable Long idCredencial,
+			@RequestBody @Valid Credencial credencial) {
 		Credencial credencialEncontrada = credencialService.verificarExistencia(idCredencial);
-		
+
 		BeanUtils.copyProperties(credencial, credencialEncontrada, "id");
-		
+
 		Credencial credencialSalva = credencialService.salvar(credencialEncontrada);
-		
+
 		return ResponseEntity.ok(credencialSalva);
 	}
-	
+
 	@ApiOperation("Deve excluir uma credencial a partir de um id específico.")
 	@DeleteMapping("{idCredencial}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
