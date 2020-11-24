@@ -79,7 +79,7 @@
     <template>
       <div id="pagina-principal">
         <div class="modal-header justify-content-center">
-          <h2 class="modal-title">Bem vindo, {credencial.nome}!</h2>
+          <h2 class="modal-title">Bem vindo, {{ aluno.nome.toUpperCase() }}!</h2>
         </div>
         <div class="modal-body">
           <div class="box">
@@ -102,29 +102,29 @@
               <div class="col-md-8">
                 <div class="dados-pessoais-perfil">
                   <strong>Nome:</strong>
-                  <label> {aluno.nome}</label> 
+                  <label> {{aluno.nome}}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>Matrícula:</strong>
-                  <label> {aluno.matricula}</label> 
+                  <label> {aluno.matricula}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>CPF:</strong>
-                  <label> {aluno.cpf}</label> 
+                  <label> {aluno.cpf}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>Turma:</strong>
-                  <label> {aluno.turma}</label> 
+                  <label> {aluno.turma}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>Escolaridade:</strong>
-                  <label> {aluno.curso}</label> 
+                  <label> {aluno.curso}</label>
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <hr>
+            <hr />
             <strong>Disciplinas em Curso:</strong>
           </div>
         </div>
@@ -134,6 +134,8 @@
 </template>
 
 <script>
+import alunoService from "../../service/alunoService";
+
 export default {
   name: "dashboard-aluno",
   data() {
@@ -143,7 +145,7 @@ export default {
         funcao: null,
         cpf: null,
         turma: null,
-        matricula: null
+        matricula: null,
       },
     };
   },
@@ -151,6 +153,21 @@ export default {
     deslogar() {
       this.$router.push("login");
     },
+  },
+  beforeMount() {
+    let uri = window.location.search.substring(1); 
+    let params = new URLSearchParams(uri);
+    let idCredencial = params.get("credencial");
+
+    if (idCredencial) {
+      alunoService.getAlunoById(idCredencial).then((data) => {
+        this.aluno = data;
+        console.log(data);
+        })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
   },
 };
 </script>
@@ -206,7 +223,7 @@ export default {
   height: 350;
 }
 
-.dados-pessoais-perfil{
+.dados-pessoais-perfil {
   margin-top: 15px;
 }
 </style>

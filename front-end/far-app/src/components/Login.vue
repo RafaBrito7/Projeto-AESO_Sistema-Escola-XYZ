@@ -120,7 +120,10 @@ export default {
           .autenticate(this.credencial)
           .then((data) => {
             this.credencial = data;
-            this.$router.push("dashboard-aluno");
+            console.log(this.credencial);
+            this.$router.push({
+              name: 'dashboard-aluno', 
+              query: {credencial: this.credencial.idCredencial}});
           })
           .catch((error) => {
             console.log(error);

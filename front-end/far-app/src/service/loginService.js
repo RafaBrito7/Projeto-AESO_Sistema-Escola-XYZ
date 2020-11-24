@@ -1,10 +1,6 @@
 import axios from 'axios';
 
 const URL_LOGIN_PADRAO = 'http://localhost:9090';
-/*const headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}*/
 
 class LoginService {
     async autenticate (credencial) {

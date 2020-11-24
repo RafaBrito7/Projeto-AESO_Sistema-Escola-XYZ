@@ -12,6 +12,7 @@ export default new Router({
         component: Login
     },{
         path: "/dashboard-aluno",
+        name: 'dashboard-aluno',
         component: Dashboard
     }]
 });
