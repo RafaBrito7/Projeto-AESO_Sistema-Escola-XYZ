@@ -34,8 +34,6 @@ public class CredencialController {
 	@Autowired
 	private CredencialRepository credencialRepository;
 
-	@Autowired
-	private CredencialRepository credencialRepository;
 
 	@ApiOperation("Deve retornar uma credencial se o usuario e senha passado pelo cliente for válido")
 	@PostMapping("/autenticar")
@@ -79,10 +77,5 @@ public class CredencialController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Long idCredencial) {
 		credencialService.excluir(idCredencial);
-	}
-	
-	@GetMapping
-	public List<Credencial> listar() {
-		return credencialRepository.findAll();
 	}
 }

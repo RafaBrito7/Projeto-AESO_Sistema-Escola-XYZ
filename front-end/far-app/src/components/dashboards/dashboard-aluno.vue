@@ -79,7 +79,7 @@
     <template>
       <div id="pagina-principal">
         <div class="modal-header justify-content-center">
-          <h2 class="modal-title">Bem vindo, {{ aluno.nome.toUpperCase() }}!</h2>
+          <h2 class="modal-title">Bem vindo, {{ aluno.nome }}!</h2>
         </div>
         <div class="modal-body">
           <div class="box">
@@ -102,23 +102,23 @@
               <div class="col-md-8">
                 <div class="dados-pessoais-perfil">
                   <strong>Nome:</strong>
-                  <label> {{aluno.nome}}</label>
+                  <label> {{ aluno.nome }}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>Matrícula:</strong>
-                  <label> {aluno.matricula}</label>
+                  <label> {{ aluno.numeroMatricula }}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>CPF:</strong>
-                  <label> {aluno.cpf}</label>
+                  <label> {{ aluno.cpf }}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>Turma:</strong>
-                  <label> {aluno.turma}</label>
+                  <label> {{ aluno.nomeTurma }}</label>
                 </div>
                 <div class="dados-pessoais-perfil">
                   <strong>Escolaridade:</strong>
-                  <label> {aluno.curso}</label>
+                  <label> {{ aluno.nomeCurso }}</label>
                 </div>
               </div>
             </div>
@@ -144,8 +144,9 @@ export default {
         nome: null,
         funcao: null,
         cpf: null,
-        turma: null,
         matricula: null,
+        nomeCurso: null,
+        nomeTurma: null,
       },
     };
   },
@@ -153,20 +154,30 @@ export default {
     deslogar() {
       this.$router.push("login");
     },
+    convertToMaskCpf(cpf) {
+      cpf = cpf.padStart(11, "0");
+      cpf = cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      return cpf;
+    },
   },
   beforeMount() {
-    let uri = window.location.search.substring(1); 
+    let uri = window.location.search.substring(1);
     let params = new URLSearchParams(uri);
     let idCredencial = params.get("credencial");
 
     if (idCredencial) {
-      alunoService.getAlunoById(idCredencial).then((data) => {
-        this.aluno = data;
-        console.log(data);
+      alunoService
+        .getAlunoById(idCredencial)
+        .then((data) => {
+          this.aluno = data;
+          this.aluno.nomeTurma = data.turma.nomeTurma;
+          this.aluno.nomeCurso = data.turma.curso.nomeCurso;
+          this.aluno.cpf = this.convertToMaskCpf(data.cpf);
+          console.log(data);
         })
-          .catch((error) => {
-            console.log(error);
-          });
+        .catch((error) => {
+          console.log(error);
+        });
     }
   },
 };
@@ -225,5 +236,9 @@ export default {
 
 .dados-pessoais-perfil {
   margin-top: 15px;
+}
+
+.dados-pessoais-perfil label {
+  margin-left: 5px;
 }
 </style>

@@ -62,7 +62,7 @@ public class AlunoController {
 	}
 
 	@ApiOperation("Deve retornar um aluno a partir da credencial.")
-	@GetMapping("/login/{idCredencial}")
+	@GetMapping("/{idCredencial}")
 	public ResponseEntity<Aluno> buscarPorCredencial(@PathVariable Long idCredencial) {
 		Optional<Aluno> aluno = alunoRepository.findByCredencial(idCredencial);
 
