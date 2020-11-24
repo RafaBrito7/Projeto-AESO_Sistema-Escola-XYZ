@@ -50,13 +50,28 @@ public class AlunoController {
 	}
 
 	@ApiOperation("Deve retornar um aluno a partir de um determinado id")
-	@GetMapping("/{idAluno}")
+	@GetMapping("buscar/{idAluno}")
 	public ResponseEntity<Aluno> buscar(@PathVariable Long idAluno) {
 		Optional<Aluno> aluno = alunoRepository.findById(idAluno);
 
 		if (!aluno.isPresent()) {
 			throw new EntidadeNaoEncontradaException(idAluno);
 		}
+
+		return ResponseEntity.ok(aluno.get());
+	}
+
+	@ApiOperation("Deve retornar um aluno a partir da credencial.")
+	@GetMapping("/login/{idCredencial}")
+	public ResponseEntity<Aluno> buscarPorCredencial(@PathVariable Long idCredencial) {
+		Optional<Aluno> aluno = alunoRepository.findByCredencial(idCredencial);
+
+		if (!aluno.isPresent()) {
+			throw new EntidadeNaoEncontradaException(aluno.get().getCredencial().getIdCredencial());
+		}
+
+		aluno.get().setIsLogado(true);
+		alunoServive.salvar(aluno.get());
 
 		return ResponseEntity.ok(aluno.get());
 	}
