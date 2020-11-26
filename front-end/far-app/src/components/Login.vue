@@ -120,17 +120,13 @@ export default {
           .autenticate(this.credencial)
           .then((data) => {
             this.credencial = data;
-            console.log(this.credencial);
             this.$router.push({
               name: 'dashboard-aluno', 
               query: {credencial: this.credencial.idCredencial}});
           })
           .catch((error) => {
-            console.log(error);
-            alert("Login Faiou");
+            alert("Credenciais Não Encontradas!", error);
           });
-      } else {
-        alert("Login Faiou");
       }
     },
   },

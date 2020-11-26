@@ -15,12 +15,15 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import router from '../src/router.js';
 
+import SweetAlertIcons from 'vue-sweetalert-icons';
+
 library.add(faTimes, faUser, faUnlockAlt);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(SweetAlertIcons);
 
 Vue.config.productionTip = false
 

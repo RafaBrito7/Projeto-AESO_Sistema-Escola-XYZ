@@ -29,8 +29,8 @@ public class Disciplina {
 	private Double cargaHoraria;
 
 	@ManyToOne
-	@JoinColumn(name = "id_turma")
-	private Turma turma;
+	@JoinColumn(name = "id_curso")
+	private Curso curso;
 
 	public Disciplina() {
 
@@ -48,8 +48,8 @@ public class Disciplina {
 		return cargaHoraria;
 	}
 
-	public Turma getTurma() {
-		return turma;
+	public Curso getCurso() {
+		return curso;
 	}
 
 	public void setId(Long id) {
@@ -64,8 +64,8 @@ public class Disciplina {
 		this.cargaHoraria = cargaHoraria;
 	}
 
-	public void setTurma(Turma turma) {
-		this.turma = turma;
+	public void setTurma(Curso curso) {
+		this.curso = curso;
 	}
 
 	@Override
@@ -96,6 +96,6 @@ public class Disciplina {
 	@Override
 	public String toString() {
 		return "Disciplina [id=" + id + ", nomeDisciplina=" + nomeDisciplina + ", cargaHoraria=" + cargaHoraria
-				+ ", turma=" + turma + "]";
+				+ ", curso=" + curso + "]";
 	}
 }

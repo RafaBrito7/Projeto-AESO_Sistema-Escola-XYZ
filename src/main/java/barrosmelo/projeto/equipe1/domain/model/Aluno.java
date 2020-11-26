@@ -51,7 +51,6 @@ public class Aluno {
 	@Column(name = "is_logado")
 	private Boolean isLogado;
 
-	@JsonIgnore
 	@Column(name = "data_vinculo")
 	@CreationTimestamp
 	private Date dataVinculo;
@@ -66,7 +65,6 @@ public class Aluno {
 	@JoinColumn(name = "idTurma")
 	private Turma turma;
 
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "aluno_nota", joinColumns = @JoinColumn(name = "id_pessoa"), inverseJoinColumns = @JoinColumn(name = "id_nota"))
 	private List<Nota> notas;

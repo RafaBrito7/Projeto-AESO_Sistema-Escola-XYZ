@@ -63,7 +63,7 @@
                 </b-nav>
               </nav>
             </div>
-            <div class="">
+            <div class="" style="margin-top:300px">
               <img id="img-logo-sidebar" src="@/assets/logo.png" alt="" />
             </div>
           </template>
@@ -84,9 +84,9 @@
         <div class="modal-body">
           <div class="box">
             <div class="row">
-              <div class="col-md-2"></div>
+              <div class="col-md-1"></div>
               <div class="col-md-2">
-                <div class="card" style="width: 12rem">
+                <div class="card" style="width: 12rem; text-align:center;margin-left:50px">
                   <img
                     class="card-img-top"
                     src="@/assets/foto perfil usuario.jpg"
@@ -123,9 +123,53 @@
               </div>
             </div>
           </div>
-          <div>
+          <div id="titulo-acima-tabela" style="margin-bottom: 20px">
             <hr />
             <strong>Disciplinas em Curso:</strong>
+          </div>
+          <div class="tabela-aluno">
+            <table class="table table-condensed table-bordered table-striped">
+              <colgroup id="colgroup">
+              <col width="30%">
+              <col width="10%">
+              <col width="10%">
+              <col width="10%">
+              <col width="10%">
+              <col width="30%">
+              </colgroup>
+              <thead>
+                <th>Disciplina</th>
+                <th>Carga Horária</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
+                <th>Média</th>
+                <th>Recuperação</th>
+              </thead>
+              <tbody id="body-tabela">
+                <!--
+                <tr v-for="value in aluno" v-bind:key="value.disciplina">
+                  -->
+                <tr>
+                  <td>
+                    Matemática
+                  </td>
+                  <td>
+                    45h
+                  </td>
+                  <td>
+                    5
+                  </td>
+                  <td>
+                    8
+                  </td>
+                  <td>
+                    {{(5+8)/2}}
+                  </td>
+                  <td>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -241,4 +285,13 @@ export default {
 .dados-pessoais-perfil label {
   margin-left: 5px;
 }
+
+#body-tabela td{
+  text-align: center;
+}
+
+#titulo-acima-tabela strong{
+  font-size: 1.5em;
+}
+
 </style>
